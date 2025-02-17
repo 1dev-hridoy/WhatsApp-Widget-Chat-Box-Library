@@ -18,7 +18,7 @@
  *    from the use of the Software.
  *
  * Developed by Hridoy
- * Website: https://hridoy.ttop
+ * Website: https://hridoy.top
  */
 class WhatsAppWidget {
     constructor(options = {}) {
@@ -234,10 +234,8 @@ class WhatsAppWidget {
     }
 }
 
-// Modify the default initialization at the bottom of the file
 if (typeof window !== 'undefined') {
     document.addEventListener('DOMContentLoaded', () => {
-        // Check if custom config exists and use it, otherwise use defaults
         const config = window.whatsappWidgetConfig || {
             phoneNumber: '+1234567890',
             welcomeMessage: 'Welcome to our WhatsApp chat! How can we help you today?',

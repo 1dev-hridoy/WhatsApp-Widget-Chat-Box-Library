@@ -3,33 +3,440 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WhatsApp Widget Test</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
-    <!-- Add your WhatsApp Widget Chat Box Library CSS here -->
-    <link rel="stylesheet" href="./src/whatsapp-widget.min.css">
-</head>
-<body class="bg-gray-100 flex items-center justify-center h-screen">
-    <div class="text-center">
-        <h1 class="text-3xl font-bold text-gray-800">WhatsApp Widget Test Page</h1>
-        <p class="text-gray-600 mt-2">This is a simple test page for the WhatsApp chat widget.</p>
-        
-        <!-- Add your WhatsApp Widget Chat Box here -->
-        <div id="whatsapp-widget-container"></div>
-    </div>
+    <title>WhatsApp Widget - Free Chat Integration Library</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/1dev-hridoy/whatsapp-widget-chat-box-library@latest/src/whatsapp-widget.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/gh/1dev-hridoy/whatsapp-widget-chat-box-library@latest/src/whatsapp-widget.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
-    <!-- Add your WhatsApp Widget Chat Box Library JS here -->
-    <script src="./src/whatsapp-widget.js"></script>
+        :root {
+            --primary: #25D366;
+            --secondary: #128C7E;
+            --dark: #075E54;
+            --light: #DCF8C6;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--light);
+        }
+
+        .hero {
+            padding: 8rem 0 5rem;
+            text-align: center;
+            background: linear-gradient(135deg, var(--secondary), var(--dark));
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--white);
+            color: var(--primary);
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .features {
+            padding: 5rem 0;
+            background-color: var(--light);
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-card i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .demo {
+            padding: 5rem 0;
+            background: var(--white);
+        }
+
+        .demo h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: var(--dark);
+        }
+
+        .demo-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .demo-code {
+            width: 100%;
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            overflow-x: auto;
+        }
+
+        .demo-code pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .github-stats {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .github-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--dark);
+            color: var(--white);
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .github-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .stats {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--dark);
+        }
+
+        footer {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .social-links {
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: var(--white);
+            font-size: 1.5rem;
+            margin: 0 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
+        }
+
+        .license-badge {
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .demo-code {
+                font-size: 14px;
+                padding: 1rem;
+            }
+
+            .stats {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            nav ul {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">WhatsApp Widget</div>
+            <nav>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="./demo/index.html">Demo</a></li>
+                    <li><a href="https://github.com/1dev-hridoy/WhatsApp-Widget-Chat-Box-Library" target="_blank">GitHub</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div id="particles-js"></div>
+        <div class="container hero-content">
+            <h1>WhatsApp Chat Integration Made Simple</h1>
+            <p>Add WhatsApp chat functionality to your website with just a few lines of code</p>
+            <a href="#demo" class="btn">
+                <i class="fas fa-code"></i>
+                Get Started
+            </a>
+            <div class="license-badge">
+                <img src="https://camo.githubusercontent.com/cce5a2a14b0faab422e0bfcdc074afb46089831a0bf5930a7d8af3f31b98f847/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4c6963656e73652d4d49542d626c75652e737667" alt="MIT License" data-canonical-src="https://img.shields.io/badge/License-MIT-blue.svg" style="max-width: 100%;">
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <h2>Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Quick Setup</h3>
+                    <p>Integrate WhatsApp chat in minutes with minimal code required.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-paint-brush"></i>
+                    <h3>Customizable</h3>
+                    <p>Easily customize the appearance to match your website's design.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Responsive</h3>
+                    <p>Works perfectly on all devices and screen sizes.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-code"></i>
+                    <h3>Lightweight</h3>
+                    <p>Minimal impact on your website's loading speed.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="demo" class="demo">
+        <div class="container">
+            <h2>Implementation</h2>
+            <div class="demo-wrapper">
+                <div class="demo-code">
+                    <pre><code>&lt;!-- Add WhatsApp Widget to your site --&gt;
+&lt;script&gt;
+    window.whatsChatConfig = {
+        phoneNumber: '+1234567890',
+        welcomeMessage: 'Hello! How can I help?'
+    };
+&lt;/script&gt;
+&lt;script src="https://cdn.jsdelivr.net/gh/1dev-hridoy/WhatsApp-Widget-Chat-Box-Library/dist/whatschat.min.js"&gt;&lt;/script&gt;</code></pre>
+                </div>
+                <div class="github-stats">
+                    <a href="https://github.com/1dev-hridoy/WhatsApp-Widget-Chat-Box-Library" 
+                       class="github-button" target="_blank">
+                        <i class="fab fa-github"></i> View on GitHub
+                    </a>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <i class="far fa-star"></i>
+                            <span>0 stars</span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-code-branch"></i>
+                            <span>0 forks</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>Open source and free to use</p>
+            <div class="social-links">
+                <a href="https://github.com/1dev-hridoy/WhatsApp-Widget-Chat-Box-Library" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+<div id="whatsapp-widget-container"></div>
+    <!-- Particles.js -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        window.whatsappWidgetConfig = {
-            phoneNumber: '+1234567890',
-            welcomeMessage: 'Welcome to our ddddcustom chat! How may we assist you?',
-            companyName: 'My gg Name',
-            agentName: 'Custom Agent',
-            closedMessage: 'We are currently offline. Please leave a message.',
-            customResponse: 'This is a custom response message. Would you like to continue on WhatsApp?',
-            position: 'right'
-        };
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: "#ffffff" },
+                shape: { type: "circle", stroke: { width: 0, color: "#000000" }, },
+                opacity: { value: 0.5, random: false, },
+                size: { value: 3, random: true, },
+                line_linked: { enable: true, distance: 150, color: "#ffffff", opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 6, direction: "none", random: false, straight: false, out_mode: "out", bounce: false, }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" }, resize: true },
+                modes: { grab: { distance: 400, line_linked: { opacity: 1 } }, bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 }, repulse: { distance: 200, duration: 0.4 }, push: { particles_nb: 4 }, remove: { particles_nb: 2 } }
+            },
+            retina_detect: true
+        });
     </script>
-    
+
+    <!-- Initialize WhatsApp Widget Data -->
+    <script>
+        // window.whatsappWidgetConfig = {
+        //     phoneNumber: '+1234567890',
+        //     welcomeMessage: 'Welcome to our custom chat! How may we assist you?',
+        //     companyName: 'My Company Name',
+        //     agentName: 'Custom Agent',
+        //     closedMessage: 'We are currently offline. Please leave a message.',
+        //     customResponse: 'This is a custom response message. Would you like to continue on WhatsApp?',
+        //     position: 'right'
+        // };
+    </script>
+    <script src="https://cdn.jsdelivr.net/gh/1dev-hridoy/WhatsApp-Widget-Chat-Box-Library/dist/whatschat.min.js"></script>
 </body>
 </html>
