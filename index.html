@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Widget Test</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <!-- Add your WhatsApp Widget Chat Box Library CSS here -->
+    <link rel="stylesheet" href="./src/whatsapp-widget.min.css">
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+    <div class="text-center">
+        <h1 class="text-3xl font-bold text-gray-800">WhatsApp Widget Test Page</h1>
+        <p class="text-gray-600 mt-2">This is a simple test page for the WhatsApp chat widget.</p>
+        
+        <!-- Add your WhatsApp Widget Chat Box here -->
+        <div id="whatsapp-widget-container"></div>
+    </div>
+
+    <!-- Add your WhatsApp Widget Chat Box Library JS here -->
+    <script src="./src/whatsapp-widget.js"></script>
+    <script>
+        window.whatsappWidgetConfig = {
+            phoneNumber: '+1234567890',
+            welcomeMessage: 'Welcome to our ddddcustom chat! How may we assist you?',
+            companyName: 'My gg Name',
+            agentName: 'Custom Agent',
+            closedMessage: 'We are currently offline. Please leave a message.',
+            customResponse: 'This is a custom response message. Would you like to continue on WhatsApp?',
+            position: 'right'
+        };
+    </script>
+    
+</body>
+</html>
