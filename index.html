@@ -364,29 +364,28 @@
             <div class="demo-wrapper">
                 <div class="demo-code">
                     <pre><code class="language-html">
-                        &lt;!-- Include WhatsApp Widget Stylesheet --&gt;
-                        &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/1dev-hridoy/whatsapp-widget-chat-box-library@latest/src/whatsapp-widget.min.css"&gt;
-                        
-                        &lt;!-- Include WhatsApp Widget Script --&gt;
-                        &lt;script src="https://cdn.jsdelivr.net/gh/1dev-hridoy/whatsapp-widget-chat-box-library@latest/src/whatsapp-widget.js"&gt;&lt;/script&gt;
-                        
-                        &lt;!-- WhatsApp Widget Container --&gt;
-                        &lt;div id="whatsapp-widget-container"&gt;&lt;/div&gt;
-                        
-                        &lt;!-- WhatsApp Widget Configuration --&gt;
-                        &lt;script&gt;
-                            window.whatsappWidgetConfig = {
-                                phoneNumber: '+1234567890', // Contact number for WhatsApp chat
-                                welcomeMessage: 'Welcome to our custom chat! How may we assist you?', // Initial greeting message
-                                companyName: 'My Company Name', // Displayed company name
-                                agentName: 'Custom Agent', // Agent's name shown to users
-                                closedMessage: 'We are currently offline. Please leave a message.', // Message displayed during offline hours
-                                customResponse: 'This is a custom response message. Would you like to continue on WhatsApp?', // Automated custom response
-                                position: 'right' // Position of the widget (left or right)
-                            };
-                        &lt;/script&gt;
-                        </code></pre>
-                        
+&lt;!-- Include WhatsApp Widget Stylesheet --&gt;
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/1dev-hridoy/whatsapp-widget-chat-box-library@latest/src/whatsapp-widget.min.css"&gt;
+
+&lt;!-- Include WhatsApp Widget Script --&gt;
+&lt;script src="https://cdn.jsdelivr.net/gh/1dev-hridoy/whatsapp-widget-chat-box-library@latest/src/whatsapp-widget.js"&gt;&lt;/script&gt;
+
+&lt;!-- WhatsApp Widget Container --&gt;
+&lt;div id="whatsapp-widget-container"&gt;&lt;/div&gt;
+
+&lt;!-- WhatsApp Widget Configuration --&gt;
+&lt;script&gt;
+    window.whatsappWidgetConfig = {
+        phoneNumber: '+1234567890',
+        welcomeMessage: 'Welcome to our custom chat! How may we assist you?',
+        companyName: 'My Company Name',
+        agentName: 'Custom Agent',
+        closedMessage: 'We are currently offline. Please leave a message.',
+        customResponse: 'This is a custom response message. Would you like to continue on WhatsApp?',
+        position: 'right'
+    };
+&lt;/script&gt;
+                    </code></pre>
                 </div>
                 <div class="github-stats">
                     <a href="https://github.com/1dev-hridoy/WhatsApp-Widget-Chat-Box-Library" 
@@ -396,11 +395,11 @@
                     <div class="stats">
                         <div class="stat-item">
                             <i class="far fa-star"></i>
-                            <span>0 stars</span>
+                            <span id="stars-count">Loading...</span>
                         </div>
                         <div class="stat-item">
                             <i class="fas fa-code-branch"></i>
-                            <span>0 forks</span>
+                            <span id="forks-count">Loading...</span>
                         </div>
                     </div>
                 </div>
@@ -454,5 +453,23 @@
         // };
     </script>
     <script src="https://cdn.jsdelivr.net/gh/1dev-hridoy/WhatsApp-Widget-Chat-Box-Library/dist/whatschat.min.js"></script>
+    <script>
+        // Fetch repository stats
+        async function updateRepoStats() {
+            try {
+                const response = await fetch('http://localhost:3000/api/repo-stats');
+                const data = await response.json();
+                
+                document.getElementById('stars-count').textContent = `${data.stars} stars`;
+                document.getElementById('forks-count').textContent = `${data.forks} forks`;
+            } catch (error) {
+                console.error('Error fetching repo stats:', error);
+            }
+        }
+
+        // Update stats initially and every 5 minutes
+        updateRepoStats();
+        setInterval(updateRepoStats, 5 * 60 * 1000);
+    </script>
 </body>
 </html>

@@ -1,12 +1,13 @@
 {
-  "name": "whatsApp-widget-chat-box-library",
+  "name": "whatsapp-widget-chat-box-library",
   "version": "1.0.0",
   "description": "A customizable WhatsApp chat widget for websites",
   "main": "dist/whatsapp-widget.min.js",
   "style": "dist/whatsapp-widget.min.css",
   "scripts": {
     "build": "webpack --mode production",
-    "dev": "webpack --mode development --watch"
+    "dev": "webpack --mode development --watch",
+    "start": "node server.js"
   },
   "keywords": [
     "whatsapp",
@@ -21,6 +22,11 @@
     "type": "git",
     "url": "git+https://github.com/1dev-hridoy/WhatsApp-Widget-Chat-Box-Library.git"
   },
+  "dependencies": {
+    "express": "^4.18.2",
+    "axios": "^1.6.2",
+    "cors": "^2.8.5"
+  },
   "devDependencies": {
     "@babel/core": "^7.23.0",
     "@babel/preset-env": "^7.22.20",
@@ -32,4 +38,4 @@
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4"
   }
-} 
+}
