@@ -2,6 +2,7 @@
 
 A lightweight, customizable WhatsApp chat widget that can be easily integrated into any website. This widget provides a seamless way for your website visitors to connect with you via WhatsApp.
 
+![WhatsApp Widget Preview](https://github.com/user-attachments/assets/a761ac5f-8b49-4f24-b267-b14c8419fca2)
 
 
 ## Features
